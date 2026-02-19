@@ -13,11 +13,11 @@ sandbox/
 ```
 
 ### CORE (Spring Boot)
-- Listens on **http://localhost:8080**
+- Listens on **http://localhost:8088**
 - Connects to an MQTT broker (Eclipse Paho v3)
 - Stores all received messages to H2 (file-based, `./data/mqttcore.mv.db`)
 - Provides a secured REST API (JWT Bearer tokens)
-- H2 console available at **http://localhost:8080/h2-console**
+- H2 console available at **http://localhost:8088/h2-console**
 
 ### GUI (React + Vite)
 - Listens on **http://localhost:5173** (dev mode)

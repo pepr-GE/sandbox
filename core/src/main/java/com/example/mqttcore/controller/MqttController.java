@@ -44,6 +44,14 @@ public class MqttController {
                 .body(subscriptionService.createSubscription(request));
     }
 
+    @PutMapping("/subscriptions/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<MqttSubscriptionDto> updateSubscription(
+            @PathVariable Long id,
+            @Valid @RequestBody MqttSubscriptionDto request) {
+        return ResponseEntity.ok(subscriptionService.updateSubscription(id, request));
+    }
+
     @PatchMapping("/subscriptions/{id}/toggle")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MqttSubscriptionDto> toggleSubscription(

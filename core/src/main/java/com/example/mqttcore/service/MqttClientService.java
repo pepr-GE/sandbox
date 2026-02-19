@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MqttClientService implements MqttCallback {
+public class MqttClientService implements MqttCallbackExtended {
 
     @Value("${mqtt.broker.url}")
     private String brokerUrl;
@@ -71,10 +71,7 @@ public class MqttClientService implements MqttCallback {
 
             log.info("Connecting to MQTT broker: {}", brokerUrl);
             mqttClient.connect(options);
-            connected = true;
-            log.info("Connected to MQTT broker successfully");
-
-            resubscribeAll();
+            // connected flag and resubscribeAll() are handled in connectComplete()
 
         } catch (MqttException e) {
             connected = false;
@@ -133,7 +130,15 @@ public class MqttClientService implements MqttCallback {
         return connected && mqttClient != null && mqttClient.isConnected();
     }
 
-    // --- MqttCallback ---
+    // --- MqttCallbackExtended ---
+
+    @Override
+    public void connectComplete(boolean reconnect, String serverURI) {
+        connected = true;
+        log.info("{} to MQTT broker: {} — resubscribing all active topics",
+                reconnect ? "Reconnected" : "Connected", serverURI);
+        resubscribeAll();
+    }
 
     @Override
     public void connectionLost(Throwable cause) {

@@ -47,6 +47,21 @@ public class MqttSubscriptionService {
     }
 
     @Transactional
+    public MqttSubscriptionDto updateSubscription(Long id, MqttSubscriptionDto request) {
+        MqttSubscription sub = findById(id);
+        boolean qosChanged = sub.getQos() != request.getQos();
+        sub.setQos(request.getQos());
+        sub.setDescription(request.getDescription());
+        MqttSubscription saved = subscriptionRepository.save(sub);
+        // Re-subscribe with new QoS if active
+        if (saved.isActive() && qosChanged) {
+            mqttClientService.unsubscribe(saved.getTopicFilter());
+            mqttClientService.subscribe(saved.getTopicFilter(), saved.getQos());
+        }
+        return toDto(saved);
+    }
+
+    @Transactional
     public MqttSubscriptionDto toggleSubscription(Long id, boolean active) {
         MqttSubscription sub = findById(id);
         sub.setActive(active);
