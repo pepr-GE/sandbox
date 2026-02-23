@@ -9,7 +9,27 @@
       "Bash(python:*)",
       "Bash(powershell -File -:*)",
       "Bash(printf:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(curl:*)",
+      "Bash(mvn package:*)",
+      "Bash(mvn compile:*)",
+      "Bash(mvn spring-boot:run:*)",
+      "Bash(mvn flyway:repair:*)",
+      "Bash(netstat:*)",
+      "Bash(tasklist:*)",
+      "Read(//c/SRC/sprinter/**)",
+      "Read(//tmp/**)",
+      "Bash(mvn:*)",
+      "Bash(ls:*)",
+      "Read(//c/SRC/sandbox/**)",
+      "Bash(xargs:*)",
+      "Bash(wmic process:*)",
+      "Bash(taskkill:*)",
+      "Bash(./mvnw compile:*)",
+      "Bash(cmd.exe /c \"taskkill /PID 38484 /F\")",
+      "Bash(/c/SRC/sprinter/src/main/resources/static/css/sprinter.css:*)",
+      "Bash(# Try to find default credentials from DataInitializer grep -r \"\"password\\\\|admin\\\\|user\"\" /c/SRC/sprinter/src/main/java/com/sprinter/config/DataInitializer.java)",
+      "Bash(\"c:\\\\SRC\\\\sprinter\\\\src\\\\main\\\\resources\\\\static\\\\css\\\\sprinter.css\":*)"
     ]
   }
 }
